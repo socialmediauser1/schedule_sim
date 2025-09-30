@@ -1,6 +1,8 @@
 package group.scheduler_sim;
 
 import group.scheduler_sim.algorithms.FirstComeFirstServed;
+import group.scheduler_sim.algorithms.ShortestJobNext;
+import group.scheduler_sim.algorithms.SchedulingAlgorithm;
 import group.scheduler_sim.model.Process;
 import group.scheduler_sim.model.ScheduledSlice;
 import group.scheduler_sim.model.SimulationResult;
@@ -23,7 +25,6 @@ import java.util.Map;
 public class HelloController {
 
     @FXML private ChoiceBox<String> algorithmChoice;
-    @FXML private Spinner<Integer> quantumSpinner;
     @FXML private TextField idField;
     @FXML private TextField arrivalField;
     @FXML private TextField burstField;
@@ -41,7 +42,8 @@ public class HelloController {
     @FXML
     public void initialize() {
         algorithmChoice.setItems(FXCollections.observableArrayList(
-                "First Come First Served"
+                "First Come First Served",
+                "Shortest Job Next"
         ));
         algorithmChoice.getSelectionModel().selectFirst();
 
@@ -81,7 +83,14 @@ public class HelloController {
 
     @FXML
     public void onRun() {
-        SimulationResult result = new FirstComeFirstServed().simulate(new ArrayList<>(processes));
+        SchedulingAlgorithm algorithm;
+        String selected = algorithmChoice.getValue();
+        if ("Shortest Job Next".equals(selected)) {
+            algorithm = new ShortestJobNext();
+        } else {
+            algorithm = new FirstComeFirstServed();
+        }
+        SimulationResult result = algorithm.simulate(new ArrayList<>(processes));
         renderResult(result);
     }
 
