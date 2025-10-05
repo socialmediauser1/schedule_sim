@@ -1,0 +1,142 @@
+package group.scheduler_sim.algorithms;
+
+import group.scheduler_sim.model.Process;
+import group.scheduler_sim.model.ScheduledSlice;
+import group.scheduler_sim.model.SimulationResult;
+
+import java.util.*;
+
+/**
+ * Preemptive Round Robin (RR) scheduling.
+ */
+public class RoundRobin implements SchedulingAlgorithm {
+    
+    private final int timeQuantum;
+
+    public RoundRobin() {
+        this.timeQuantum = 1; // Default time quantum
+    }
+
+    public RoundRobin(int timeQuantum) {
+        if (timeQuantum <= 0) {
+            throw new IllegalArgumentException("Time quantum must be positive");
+        }
+        this.timeQuantum = timeQuantum;
+    }
+
+    @Override
+    public String getName() {
+        return "Round Robin (TQ=" + timeQuantum + ")";
+    }
+
+    @Override
+    public SimulationResult simulate(List<Process> processes) {
+        if (processes.isEmpty()) {
+            return new SimulationResult(new ArrayList<>(), 0, 0, 0);
+        }
+
+        List<ProcessWithRemaining> processesWithRemaining = new ArrayList<>();
+        for (Process p : processes) {
+            processesWithRemaining.add(new ProcessWithRemaining(p));
+        }
+
+        // Sort by arrival time with inbuilt java function
+        processesWithRemaining.sort(Comparator.comparingInt(p -> p.process.getArrivalTime()));
+
+        List<ScheduledSlice> timeline = new ArrayList<>();
+        Map<String, Integer> firstStart = new HashMap<>();
+        Map<String, Integer> completion = new HashMap<>();
+        Queue<ProcessWithRemaining> readyQueue = new LinkedList<>();
+
+        int currentTime = 0;
+        ProcessWithRemaining currentProcess = null;
+        int processIndex = 0;
+        int quantumRemaining = 0;
+
+        while (true) {
+            while (processIndex < processesWithRemaining.size()) {
+                ProcessWithRemaining p = processesWithRemaining.get(processIndex);
+                if (p.process.getArrivalTime() <= currentTime) {
+                    readyQueue.offer(p);
+                    processIndex++;
+                } else {
+                    break;
+                }
+            }
+
+            if (currentProcess != null) {
+                if (quantumRemaining == 0 || currentProcess.remainingTime == 0) {
+                    if (currentTime > currentProcess.lastStartTime) {
+                        timeline.add(new ScheduledSlice(currentProcess.process.getId(), 
+                                currentProcess.lastStartTime, currentTime));
+                    }
+                    
+                    if (currentProcess.remainingTime == 0) {
+                        completion.put(currentProcess.process.getId(), currentTime);
+                        currentProcess = null;
+                    } else {
+                        readyQueue.offer(currentProcess);
+                        currentProcess = null;
+                    }
+                }
+            }
+
+            if (currentProcess == null && !readyQueue.isEmpty()) {
+                currentProcess = readyQueue.poll();
+                currentProcess.lastStartTime = currentTime;
+                quantumRemaining = timeQuantum;
+                firstStart.putIfAbsent(currentProcess.process.getId(), currentTime);
+            }
+
+            if (currentProcess == null && processIndex < processesWithRemaining.size()) {
+                currentTime = processesWithRemaining.get(processIndex).process.getArrivalTime();
+                continue;
+            }
+
+            if (currentProcess == null) {
+                break;
+            }
+
+            currentProcess.remainingTime--;
+            quantumRemaining--;
+            currentTime++;
+        }
+
+        double totalWaiting = 0;
+        double totalTurnaround = 0;
+        double totalResponse = 0;
+        int n = processes.size();
+        
+        for (Process p : processes) {
+            int comp = completion.get(p.getId());
+            int start = firstStart.get(p.getId());
+            int turnaround = comp - p.getArrivalTime();
+            int waiting = turnaround - p.getBurstTime();
+            int response = start - p.getArrivalTime();
+            totalWaiting += waiting;
+            totalTurnaround += turnaround;
+            totalResponse += response;
+        }
+
+        return new SimulationResult(
+                timeline,
+                n == 0 ? 0 : totalWaiting / n,
+                n == 0 ? 0 : totalTurnaround / n,
+                n == 0 ? 0 : totalResponse / n
+        );
+    }
+
+
+    private static class ProcessWithRemaining {
+        final Process process;
+        int remainingTime;
+        int lastStartTime;
+
+        ProcessWithRemaining(Process process) {
+            this.process = process;
+            this.remainingTime = process.getBurstTime();
+            this.lastStartTime = -1;
+        }
+    }
+
+}
