@@ -1,5 +1,6 @@
 package group.scheduler_sim.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,14 +17,14 @@ public class SimulationResult {
                             double averageWaitingTime,
                             double averageTurnaroundTime,
                             double averageResponseTime) {
-        this.timeline = List.copyOf(timeline);
+        this.timeline = Collections.unmodifiableList(new ArrayList<>(timeline));
         this.averageWaitingTime = averageWaitingTime;
         this.averageTurnaroundTime = averageTurnaroundTime;
         this.averageResponseTime = averageResponseTime;
     }
 
     public List<ScheduledSlice> getTimeline() {
-        return Collections.unmodifiableList(timeline);
+        return timeline;
     }
 
     public double getAverageWaitingTime() {
