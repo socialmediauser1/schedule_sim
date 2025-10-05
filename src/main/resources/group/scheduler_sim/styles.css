@@ -1,51 +1,146 @@
 .root {
-    -fx-font-family: "Segoe UI", Arial, sans-serif;
-    -fx-font-size: 13px;
+    -fx-font-family: Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f8f9fa;
 }
 
 .toolbar {
-    -fx-background-color: linear-gradient(to bottom, #f8f9fa, #e9ecef);
-    -fx-padding: 10 12 10 12;
-    -fx-border-color: #d0d7de;
+    -fx-background-color: #ffffff;
+    -fx-padding: 15 20 15 20;
+    -fx-border-color: #e1e5e9;
     -fx-border-width: 0 0 1 0;
 }
 
-label.title {
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+}
+
+.algorithm-label {
+    -fx-font-weight: normal;
+    -fx-text-fill: #000000;
+}
+
+.quantum-label {
+    -fx-font-weight: normal;
+    -fx-text-fill: #000000;
+}
+
+.gantt-container {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1;
+    -fx-padding: 15;
+}
+
+.gantt-title {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+    -fx-padding: 0 0 10 0;
 }
 
 .gantt-block {
-    -fx-background-radius: 4;
-    -fx-border-radius: 4;
     -fx-border-width: 1;
+    -fx-border-color: #333333;
+}
+
+.metrics-container {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1;
+    -fx-padding: 15;
 }
 
 .metrics {
-    -fx-padding: 6 0 0 0;
-    -fx-text-fill: #444;
+    -fx-padding: 8 0 0 0;
+    -fx-text-fill: #000000;
+    -fx-font-weight: normal;
+    -fx-font-size: 13px;
+}
+
+.table-container {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1;
+    -fx-padding: 10;
 }
 
 .table-view {
     -fx-background-color: white;
-    -fx-border-color: #d0d7de;
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #dee2e6;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+}
+
+.table-view .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 8 12 8 12;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #e3f2fd;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #f5f5f5;
+}
+
+.input-container {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1;
+    -fx-padding: 15;
 }
 
 .button {
-    -fx-background-color: #2d6cdf;
-    -fx-text-fill: white;
-    -fx-background-radius: 6;
-    -fx-padding: 6 12 6 12;
+    -fx-background-color: #f8f9fa;
+    -fx-text-fill: #000000;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1;
+    -fx-padding: 8 16 8 16;
+    -fx-font-weight: normal;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
 }
 
 .button:hover {
-    -fx-background-color: #255dd6;
+    -fx-background-color: #e9ecef;
+}
+
+.button:pressed {
+    -fx-background-color: #dee2e6;
 }
 
 .text-field, .choice-box, .spinner {
     -fx-background-color: white;
-    -fx-border-color: #c9d1d9;
-    -fx-background-radius: 6;
-    -fx-border-radius: 6;
+    -fx-border-color: #ced4da;
+    -fx-border-width: 1;
+    -fx-padding: 6 10 6 10;
+    -fx-font-size: 13px;
+}
+
+.text-field:focused, .choice-box:focused, .spinner:focused {
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+}
+
+.choice-box .arrow {
+    -fx-background-color: #6c757d;
+}
+
+.spinner .increment-arrow-button, .spinner .decrement-arrow-button {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #ced4da;
+}
+
+.spinner .increment-arrow-button:hover, .spinner .decrement-arrow-button:hover {
+    -fx-background-color: #e9ecef;
 }
 

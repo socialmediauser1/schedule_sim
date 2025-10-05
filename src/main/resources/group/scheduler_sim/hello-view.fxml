@@ -12,41 +12,64 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="group.scheduler_sim.HelloController">
   <top>
-    <HBox spacing="10" alignment="CENTER_LEFT" BorderPane.alignment="CENTER" styleClass="toolbar">
-      <padding>
-        <Insets top="10" bottom="10" left="10" right="10" />
-      </padding>
-      <Label text="CPU Scheduling Simulator" styleClass="title" />
-      <Label text="Algorithm:" />
-      <ChoiceBox fx:id="algorithmChoice" />
-      <Button text="Run" onAction="#onRun" />
-    </HBox>
+    <VBox styleClass="toolbar">
+      <HBox spacing="15" alignment="CENTER_LEFT">
+        <Label text="CPU Scheduling Simulator" styleClass="title" />
+      </HBox>
+      <HBox spacing="15" alignment="CENTER_LEFT">
+        <Label text="Algorithm:" styleClass="algorithm-label" />
+        <ChoiceBox fx:id="algorithmChoice" prefWidth="200" />
+        <Label text="Time Quantum:" styleClass="quantum-label" />
+        <Spinner fx:id="timeQuantumSpinner" prefWidth="80" />
+        <Button text="Run Simulation" onAction="#onRun" />
+      </HBox>
+    </VBox>
   </top>
   <center>
-    <VBox spacing="10">
-      <HBox spacing="10" alignment="CENTER_LEFT">
-        <TextField fx:id="idField" promptText="Process ID" />
-        <TextField fx:id="arrivalField" promptText="Arrival" />
-        <TextField fx:id="burstField" promptText="Burst" />
-        <Button text="Add" onAction="#onAddProcess" />
-        <Button text="Clear" onAction="#onClearProcesses" />
-      </HBox>
-      <TableView fx:id="processTable" prefHeight="200">
-        <columns>
-          <TableColumn text="ID" fx:id="colId" />
-          <TableColumn text="Arrival" fx:id="colArrival" />
-          <TableColumn text="Burst" fx:id="colBurst" />
-        </columns>
-      </TableView>
-      <Label text="Timeline (Gantt)" />
-      <HBox fx:id="gantt" spacing="2" />
-      <HBox spacing="20" styleClass="metrics">
-        <Label fx:id="avgWaiting" text="Avg Waiting: -" />
-        <Label fx:id="avgTurnaround" text="Avg Turnaround: -" />
-        <Label fx:id="avgResponse" text="Avg Response: -" />
-      </HBox>
+    <VBox spacing="20" style="-fx-padding: 20;">
+      <!-- Input Section -->
+      <VBox styleClass="input-container" spacing="15">
+        <Label text="Process Input" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #000000;" />
+        <HBox spacing="10" alignment="CENTER_LEFT">
+          <TextField fx:id="idField" promptText="Process ID (e.g., P1)" prefWidth="120" />
+          <TextField fx:id="arrivalField" promptText="Arrival Time" prefWidth="120" />
+          <TextField fx:id="burstField" promptText="Burst Time" prefWidth="120" />
+          <Button text="Add Process" onAction="#onAddProcess" />
+          <Button text="Clear All" onAction="#onClearProcesses" />
+        </HBox>
+        <TableView fx:id="processTable" prefHeight="180" styleClass="table-container">
+          <columns>
+            <TableColumn text="Process ID" fx:id="colId" prefWidth="120" />
+            <TableColumn text="Arrival Time" fx:id="colArrival" prefWidth="120" />
+            <TableColumn text="Burst Time" fx:id="colBurst" prefWidth="120" />
+          </columns>
+        </TableView>
+      </VBox>
+
+      <!-- Gantt Chart Section -->
+      <VBox styleClass="gantt-container" spacing="15">
+        <Label text="Execution Timeline (Gantt Chart)" styleClass="gantt-title" />
+        <HBox fx:id="gantt" spacing="2" alignment="CENTER_LEFT" />
+      </VBox>
+
+      <!-- Metrics Section -->
+      <VBox styleClass="metrics-container" spacing="15">
+        <Label text="Performance Metrics" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #000000;" />
+        <GridPane hgap="40" vgap="10">
+          <columnConstraints>
+            <ColumnConstraints prefWidth="200" />
+            <ColumnConstraints prefWidth="200" />
+            <ColumnConstraints prefWidth="200" />
+          </columnConstraints>
+          <Label fx:id="avgWaiting" text="Avg Waiting Time: -" styleClass="metrics" GridPane.columnIndex="0" />
+          <Label fx:id="avgTurnaround" text="Avg Turnaround Time: -" styleClass="metrics" GridPane.columnIndex="1" />
+          <Label fx:id="avgResponse" text="Avg Response Time: -" styleClass="metrics" GridPane.columnIndex="2" />
+        </GridPane>
+      </VBox>
     </VBox>
   </center>
 </BorderPane>
