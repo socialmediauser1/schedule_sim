@@ -48,3 +48,26 @@
 2.  **Select Algorithm**: Choose an algorithm from the dropdown menu. For Round Robin, a time quantum spinner will appear.
 3.  **Run Simulation**: Click the "Run Simulation" button.
 4.  **View Results**: The Gantt chart will display the scheduling timeline, and the metrics panel will show the average Waiting, Turnaround, and Response times.
+
+## Project Structure
+schedule_sim/
+└── src/main/java/group/scheduler_sim/
+├── HelloApplication.java # Main JavaFX application class
+├── Launcher.java # Launcher with main() method
+├── HelloController.java # Main UI controller
+├── algorithms/ # Scheduling algorithm implementations
+│ ├── SchedulingAlgorithm.java # Interface
+│ ├── FirstComeFirstServed.java
+│ ├── ShortestJobNext.java
+│ ├── ShortestRemainingTime.java
+│ └── RoundRobin.java
+├── engine/
+│ └── Simulator.java # Simulation coordinator
+└── model/ # Core data classes
+├── Process.java
+├── ScheduledSlice.java
+└── SimulationResult.java
+
+src/main/resources/group/scheduler_sim/
+├── hello-view.fxml # UI layout definition
+└── styles.css # Application stylesheet
