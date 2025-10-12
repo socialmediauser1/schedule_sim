@@ -50,24 +50,30 @@
 4.  **View Results**: The Gantt chart will display the scheduling timeline, and the metrics panel will show the average Waiting, Turnaround, and Response times.
 
 ## Project Structure
+(You may ignore the rest of the directories, but they are required for the JavaFX to work)
 schedule_sim/
-└── src/main/java/group/scheduler_sim/
-├── HelloApplication.java # Main JavaFX application class
-├── Launcher.java # Launcher with main() method
-├── HelloController.java # Main UI controller
-├── algorithms/ # Scheduling algorithm implementations
-│ ├── SchedulingAlgorithm.java # Interface
-│ ├── FirstComeFirstServed.java
-│ ├── ShortestJobNext.java
-│ ├── ShortestRemainingTime.java
-│ └── RoundRobin.java
-├── engine/
-│ └── Simulator.java # Simulation coordinator
-└── model/ # Core data classes
-├── Process.java
-├── ScheduledSlice.java
-└── SimulationResult.java
-
-src/main/resources/group/scheduler_sim/
-├── hello-view.fxml # UI layout definition
-└── styles.css # Application stylesheet
+└── src/
+    └── main/
+        ├── java/
+        │   └── group/
+        │       └── scheduler_sim/
+        │           ├── HelloApplication.java
+        │           ├── Launcher.java
+        │           ├── HelloController.java
+        │           ├── algorithms/
+        │           │   ├── SchedulingAlgorithm.java
+        │           │   ├── FirstComeFirstServed.java
+        │           │   ├── ShortestJobNext.java
+        │           │   ├── ShortestRemainingTime.java
+        │           │   └── RoundRobin.java
+        │           ├── engine/
+        │           │   └── Simulator.java
+        │           └── model/
+        │               ├── Process.java
+        │               ├── ScheduledSlice.java
+        │               └── SimulationResult.java
+        └── resources/
+            └── group/
+                └── scheduler_sim/
+                    ├── hello-view.fxml
+                    └── styles.css
