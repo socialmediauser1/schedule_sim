@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Result of running a scheduling algorithm: Gantt slices and per-process metrics.
- */
 public class SimulationResult {
-    private final List<ScheduledSlice> timeline; // ordered by start time
+    private final List<ScheduledSlice> timeline;
     private final double averageWaitingTime;
     private final double averageTurnaroundTime;
     private final double averageResponseTime;

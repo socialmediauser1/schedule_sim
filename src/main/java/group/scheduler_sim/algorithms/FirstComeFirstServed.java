@@ -10,9 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Non-preemptive First-Come-First-Served scheduling.
- */
 public class FirstComeFirstServed implements SchedulingAlgorithm {
 
     @Override
@@ -42,7 +39,6 @@ public class FirstComeFirstServed implements SchedulingAlgorithm {
             time = end;
         }
 
-        // Compute metrics
         double totalWaiting = 0;
         double totalTurnaround = 0;
         double totalResponse = 0;

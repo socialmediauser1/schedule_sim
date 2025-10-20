@@ -6,15 +6,12 @@ import group.scheduler_sim.model.SimulationResult;
 
 import java.util.*;
 
-/**
- * Preemptive Round Robin (RR) scheduling.
- */
 public class RoundRobin implements SchedulingAlgorithm {
     
     private final int timeQuantum;
 
     public RoundRobin() {
-        this.timeQuantum = 1; // Default time quantum
+        this.timeQuantum = 1;
     }
 
     public RoundRobin(int timeQuantum) {
@@ -40,7 +37,6 @@ public class RoundRobin implements SchedulingAlgorithm {
             processesWithRemaining.add(new ProcessWithRemaining(p));
         }
 
-        // Sort by arrival time with inbuilt java function
         processesWithRemaining.sort(Comparator.comparingInt(p -> p.process.getArrivalTime()));
 
         List<ScheduledSlice> timeline = new ArrayList<>();

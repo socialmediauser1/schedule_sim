@@ -6,9 +6,6 @@ import group.scheduler_sim.model.SimulationResult;
 
 import java.util.List;
 
-/**
- * Coordinates running an algorithm on input processes.
- */
 public class Simulator {
     private final SchedulingAlgorithm algorithm;
 

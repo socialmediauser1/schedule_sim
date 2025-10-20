@@ -56,7 +56,6 @@ public class HelloController {
         ));
         algorithmChoice.getSelectionModel().selectFirst();
 
-        // Initialize time quantum spinner
         SpinnerValueFactory.IntegerSpinnerValueFactory quantumFactory = 
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 2);
         timeQuantumSpinner.setValueFactory(quantumFactory);
@@ -130,13 +129,11 @@ public class HelloController {
             "#9b59b6", "#1abc9c", "#34495e", "#e67e22"
         };
         
-        // Assign colors to processes
         for (Process p : processes) {
             colorFor.put(p.getId(), palette[colorIndex % palette.length]);
             colorIndex++;
         }
         
-        // Render timeline blocks
         for (ScheduledSlice s : result.getTimeline()) {
             javafx.scene.layout.Region block = new javafx.scene.layout.Region();
             int duration = s.getEndTime() - s.getStartTime();

@@ -2,13 +2,10 @@ package group.scheduler_sim.model;
 
 import java.util.Objects;
 
-/**
- * Represents a single CPU-bound process/job arriving to the ready queue.
- */
 public class Process {
     private final String id;
-    private final int arrivalTime; // time when process arrives
-    private final int burstTime;   // total CPU time required
+    private final int arrivalTime;
+    private final int burstTime;
 
     public Process(String id, int arrivalTime, int burstTime) {
         if (arrivalTime < 0 || burstTime <= 0) {

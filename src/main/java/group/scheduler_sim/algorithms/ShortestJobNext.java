@@ -6,9 +6,6 @@ import group.scheduler_sim.model.SimulationResult;
 
 import java.util.*;
 
-/**
- * Non-preemptive Shortest Job Next (SJN) scheduling.
- */
 public class ShortestJobNext implements SchedulingAlgorithm {
 
     @Override
@@ -29,7 +26,6 @@ public class ShortestJobNext implements SchedulingAlgorithm {
 
         int n = jobs.size();
         while (scheduled.size() < n) {
-            // Find all jobs that have arrived and are not scheduled yet
             List<Process> available = new ArrayList<>();
             for (Process p : jobs) {
                 if (!scheduled.contains(p.getId()) && p.getArrivalTime() <= time) {
@@ -37,7 +33,6 @@ public class ShortestJobNext implements SchedulingAlgorithm {
                 }
             }
             if (available.isEmpty()) {
-                // No job has arrived yet, jump to next arrival
                 int nextArrival = Integer.MAX_VALUE;
                 for (Process p : jobs) {
                     if (!scheduled.contains(p.getId())) {
@@ -47,7 +42,6 @@ public class ShortestJobNext implements SchedulingAlgorithm {
                 time = nextArrival;
                 continue;
             }
-            // Pick the job with the shortest burst time (break ties by arrival time, then id)
             available.sort(Comparator
                     .comparingInt(Process::getBurstTime)
                     .thenComparingInt(Process::getArrivalTime)
@@ -63,7 +57,6 @@ public class ShortestJobNext implements SchedulingAlgorithm {
             time = end;
         }
 
-        // Compute metrics
         double totalWaiting = 0;
         double totalTurnaround = 0;
         double totalResponse = 0;

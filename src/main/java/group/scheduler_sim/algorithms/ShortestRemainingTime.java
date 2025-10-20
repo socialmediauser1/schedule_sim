@@ -6,10 +6,6 @@ import group.scheduler_sim.model.SimulationResult;
 
 import java.util.*;
 
-/**
- * Shortest Remaining Time (SRT) scheduling.
- */
-
 public class ShortestRemainingTime implements SchedulingAlgorithm {
 
     @Override
@@ -94,7 +90,6 @@ public class ShortestRemainingTime implements SchedulingAlgorithm {
             }
         }
 
-        // metrics
         double totalWaiting = 0;
         double totalTurnaround = 0;
         double totalResponse = 0;

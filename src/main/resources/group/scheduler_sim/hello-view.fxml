@@ -31,7 +31,6 @@
   </top>
   <center>
     <VBox spacing="20" style="-fx-padding: 20;">
-      <!-- Input Section -->
       <VBox styleClass="input-container" spacing="15">
         <Label text="Process Input" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #000000;" />
         <HBox spacing="10" alignment="CENTER_LEFT">
@@ -50,13 +49,11 @@
         </TableView>
       </VBox>
 
-      <!-- Gantt Chart Section -->
       <VBox styleClass="gantt-container" spacing="15">
         <Label text="Execution Timeline (Gantt Chart)" styleClass="gantt-title" />
         <HBox fx:id="gantt" spacing="2" alignment="CENTER_LEFT" />
       </VBox>
 
-      <!-- Metrics Section -->
       <VBox styleClass="metrics-container" spacing="15">
         <Label text="Performance Metrics" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #000000;" />
         <GridPane hgap="40" vgap="10">

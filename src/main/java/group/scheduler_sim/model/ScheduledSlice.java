@@ -1,8 +1,5 @@
 package group.scheduler_sim.model;
 
-/**
- * Represents a contiguous execution slice for a process between start (inclusive) and end (exclusive).
- */
 public class ScheduledSlice {
     private final String processId;
     private final int startTime;
